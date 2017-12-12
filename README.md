@@ -59,16 +59,16 @@ GET		GET를 통해 해당 리소스를 조회합니다. 리소스를 조회하�
 PUT		PUT를 통해 해당 리소스를 수정한다.  
  DELETE	DELETE를 통해 리소스를 삭제한다.  
 
- 다음과 같은 식으로 URI는 자원을 표현하는 데에 집중하고 행위에 대한 정의는 HTTP METHOD를 통해 하는 것이 REST한 API를 설계하는 중심 규칙이다.
+  다음과 같은 식으로 URI는 자원을 표현하는 데에 집중하고 행위에 대한 정의는 HTTP METHOD를 통해 하는 것이 REST한 API를 설계하는 중심 규칙이다.
 
 ### 6. URI 설계 시 주의할 점
 - 슬래시 구분자(/)는 계층 관계를 나타내는 데 사용  
-> http://restapi.example.com/houses/apartments  
+  > http://restapi.example.com/houses/apartments  
 http://restapi.example.com/animals/mammals/whales
 
 - URI 마지막 문자로 슬래시(/)를 포함하지 않는다.  
 URI에 포함되는 모든 글자는 리소스의 유일한 식별자로 사용되어야 하며 URI가 다르다는 것은 리소스가 다르다는 것이고, 역으로 리소스가 다르면 URI도 달라져야 합니다. REST API는 분명한 URI를 만들어 통신을 해야 하기 때문에 혼동을 주지 않도록 URI 경로의 마지막에는 슬래시(/)를 사용하지 않습니다.
-> http://restapi.example.com/houses/apartments/ (X)  
+  > http://restapi.example.com/houses/apartments/ (X)  
 http://restapi.example.com/houses/apartments (0)
 
 - 하이픈(-)은 URI 가독성을 높이는데 사용  
@@ -81,7 +81,7 @@ URI를 쉽게 읽고 해석하기 위해, 불가피하게 긴 URI경로를 사�
 URI 경로에 대문자 사용은 피하도록 해야 한다. 대소문자에 따라 다른 리소스로 인식하게 되기 때문이다. RFC 3986(URI 문법 형식)은 URI 스키마와 호스트를 제외하고는 대소문자를 구별하도록 규정하기 때문이다.
 
 - 파일 확장자는 URI에 포함시키지 않는다.  
-> http://restapi.example.com/members/soccer/345/photo.jpg (X)
+  > http://restapi.example.com/members/soccer/345/photo.jpg (X)
 
   REST API에서는 메시지 바디 내용의 포맷을 나타내기 위한 파일 확장자를 URI 안에 포함시키지 않는다. Accept header를 사용하도록 한다.
   > GET / members/soccer/345/photo HTTP/1.1 Host: restapi.example.com Accept: image/jpg
@@ -90,20 +90,20 @@ URI 경로에 대문자 사용은 피하도록 해야 한다. 대소문자에 �
 ### 7. 리소스 간의 관계를 표현하는 방법
 REST 리소스 간에는 연관 관계가 있을 수 있고, 이런 경우 다음과 같은 표현방법으로 사용한다.
 
-> /리소스명/리소스 ID/관계가 있는 다른 리소스명
+  > /리소스명/리소스 ID/관계가 있는 다른 리소스명
 
 만약에 관계명이 복잡하다면 이를 서브 리소스에 명시적으로 표현하는 방법이 있다. 예를 들어 사용자가 ‘좋아하는’ 디바이스 목록을 표현해야 할 경우 다음과 같은 형태로 사용될 수 있다.
 
-> GET : /users/{userid}/likes/devices
+  > GET : /users/{userid}/likes/devices
 
 ### 8. 자원을 표현하는 Colllection과 Document
 
 Collection과 Document에 대해 알면 URI 설계가 한 층 더 쉬워진다. DOCUMENT는 단순히 문서로 이해해도 되고, 한 객체라고 이해하셔도 될 것 같다. 컬렉션은 문서들의 집합, 객체들의 집합이라고 생각하시면 이해하시는데 좀더 편하실 것 같다. 컬렉션과 도큐먼트는 모두 리소스라고 표현할 수 있으며 URI에 표현된다.
 
-> http:// restapi.example.com/sports/soccer
+  > http:// restapi.example.com/sports/soccer
 
 위 URI를 보시면 sports라는 컬렉션과 soccer라는 도큐먼트로 표현되고 있다고 생각하면 된다. 좀 더 예를 들어보자면
-> http:// restapi.example.com/sports/soccer/players/13
+  > http:// restapi.example.com/sports/soccer/players/13
 
 sports, players 컬렉션과 soccer, 13(13번인 선수)를 의미하는 도큐먼트로 URI가 이루어지게 된다. 여기서 중요한 점은 컬렉션은 복수로 사용하고 있다는 점이다. 좀 더 직관적인 REST API를 위해서는 컬렉션과 도큐먼트를 사용할 때 단수 복수도 지켜준다면 좀 더 이해하기 쉬운 URI를 설계할 수 있다.
 
@@ -111,7 +111,7 @@ sports, players 컬렉션과 soccer, 13(13번인 선수)를 의미하는 도큐�
 잘 설계된 REST API는 URI만 잘 설계된 것이 아닌 그 리소스에 대한 응답을 잘 내어주는 것까지 포함되어야 한다. 정확한 응답의 상태코드만으로도 많은 정보를 전달할 수가 있기 때문에 응답의 상태코드 값을 명확히 돌려주는 것은 생각보다 중요한 일이 될 수도 있다. 혹시 200이나 4XX관련 특정 코드 정도만 사용하고 있다면 처리 상태에 대한 좀 더 명확한 상태코드 값을 사용할 수 있기를 권장하는 바이다.
 
 상태코드
-> 200	클라이언트의 요청을 정상적으로 수행함  
+  > 200	클라이언트의 요청을 정상적으로 수행함  
 201	클라이언트가 어떠한 리소스 생성을 요청, 해당 리소스가 성공적으로 생성됨  
 400	클라이언트의 요청이 부적절 할 경우 사용하는 응답 코드  
 401	클라이언트가 인증되지 않은 상태에서 보호된 리소스를 요청했을 때 사용하는 응답 코드  
