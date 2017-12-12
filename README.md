@@ -1,16 +1,16 @@
 # REST API
 Representational State Transfer API
 
-###	REST API의 탄생
+###	1. REST API의 탄생
 REST는 Representational State Transfer라는 용어의 약자로서 2000년도에 로이 필딩 (Roy Fielding)의 박사학위 논문에서 최초로 소개되었다. 로이 필딩은 HTTP의 주요 저자 중 한 사람으로 그 당시 웹(HTTP) 설계의 우수성에 비해 제대로 사용되어지지 못하는 모습에 안타까워하며 웹의 장점을 최대한 활용할 수 있는 아키텍처로써 REST를 발표했다고 한다.
 
-###	REST 구성
+###	2. REST 구성
 쉽게 말해 REST API는 다음의 구성으로 이루어져 있다.
 > 자원(RESOURCE) - URI  
 행위(Verb) - HTTP METHOD  
 표현(Representations)  
 
-### REST 의 특징
+### 3. REST 의 특징
 - Uniform (유니폼 인터페이스)  
 Uniform Interface는 URI로 지정한 리소스에 대한 조작을 통일되고 한정적인 인터페이스로 수행하는 아키텍처 스타일을 말한다.
 
@@ -29,12 +29,12 @@ REST 서버는 API 제공, 클라이언트는 사용자 인증이나 컨텍스�
 - 계층형 구조  
 REST 서버는 다중 계층으로 구성될 수 있으며 보안, 로드 밸런싱, 암호화 계층을 추가해 구조상의 유연성을 둘 수 있고 PROXY, 게이트웨이 같은 네트워크 기반의 중간매체를 사용할 수 있게 한다.
 
-### REST API 디자인 가이드
+### 4. REST API 디자인 가이드
 
 > URI는 정보의 자원을 표현해야 한다.  
 > 자원에 대한 행위는 HTTP Method(GET, POST, PUT, DELETE)로 표현한다.
 
-### REST API 중심 규칙
+### 5. REST API 중심 규칙
 - URI는 정보의 자원을 표현해야 한다. (리소스명은 동사보다는 명사를 사용)
 > GET /members/delete/1  
 
@@ -62,7 +62,7 @@ PUT		PUT를 통해 해당 리소스를 수정한다.
 
  다음과 같은 식으로 URI는 자원을 표현하는 데에 집중하고 행위에 대한 정의는 HTTP METHOD를 통해 하는 것이 REST한 API를 설계하는 중심 규칙이다.
 
-### URI 설계 시 주의할 점
+### 6. URI 설계 시 주의할 점
 - 슬래시 구분자(/)는 계층 관계를 나타내는 데 사용  
 > http://restapi.example.com/houses/apartments  
 http://restapi.example.com/animals/mammals/whales
@@ -88,7 +88,7 @@ URI 경로에 대문자 사용은 피하도록 해야 한다. 대소문자에 �
   > GET / members/soccer/345/photo HTTP/1.1 Host: restapi.example.com Accept: image/jpg
 
 
-### 리소스 간의 관계를 표현하는 방법
+### 7. 리소스 간의 관계를 표현하는 방법
 REST 리소스 간에는 연관 관계가 있을 수 있고, 이런 경우 다음과 같은 표현방법으로 사용한다.
 
 > /리소스명/리소스 ID/관계가 있는 다른 리소스명
@@ -97,7 +97,7 @@ REST 리소스 간에는 연관 관계가 있을 수 있고, 이런 경우 다�
 
 > GET : /users/{userid}/likes/devices
 
-### 자원을 표현하는 Colllection과 Document
+### 8. 자원을 표현하는 Colllection과 Document
 
 Collection과 Document에 대해 알면 URI 설계가 한 층 더 쉬워진다. DOCUMENT는 단순히 문서로 이해해도 되고, 한 객체라고 이해하셔도 될 것 같다. 컬렉션은 문서들의 집합, 객체들의 집합이라고 생각하시면 이해하시는데 좀더 편하실 것 같다. 컬렉션과 도큐먼트는 모두 리소스라고 표현할 수 있으며 URI에 표현된다.
 
@@ -108,7 +108,7 @@ Collection과 Document에 대해 알면 URI 설계가 한 층 더 쉬워진다. 
 
 sports, players 컬렉션과 soccer, 13(13번인 선수)를 의미하는 도큐먼트로 URI가 이루어지게 된다. 여기서 중요한 점은 컬렉션은 복수로 사용하고 있다는 점이다. 좀 더 직관적인 REST API를 위해서는 컬렉션과 도큐먼트를 사용할 때 단수 복수도 지켜준다면 좀 더 이해하기 쉬운 URI를 설계할 수 있다.
 
-### HTTP 응답 상태 코드
+### 9. HTTP 응답 상태 코드
 잘 설계된 REST API는 URI만 잘 설계된 것이 아닌 그 리소스에 대한 응답을 잘 내어주는 것까지 포함되어야 한다. 정확한 응답의 상태코드만으로도 많은 정보를 전달할 수가 있기 때문에 응답의 상태코드 값을 명확히 돌려주는 것은 생각보다 중요한 일이 될 수도 있다. 혹시 200이나 4XX관련 특정 코드 정도만 사용하고 있다면 처리 상태에 대한 좀 더 명확한 상태코드 값을 사용할 수 있기를 권장하는 바이다.
 
 상태코드
@@ -121,7 +121,7 @@ sports, players 컬렉션과 soccer, 13(13번인 선수)를 의미하는 도큐�
 301	클라이언트가 요청한 리소스에 대한 URI가 변경 되었을 때 사용하는 응답 코드  
 500	서버에 문제가 있을 경우 사용하는 응답 코드  
 
-### IOF REST API Project
+### 10. IOF REST API Project
 -  설정 파일 조회  
 GET		/device  
 Device에 API_KEY와 User token을 이용하여 인증 과정을 거친 후에 라즈베리 설정 파일을 검색한다.
