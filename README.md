@@ -53,7 +53,7 @@ REST 서버는 다중 계층으로 구성될 수 있으며 보안, 로드 밸런
 
 - [참고]HTTP METHOD의 알맞은 역할  
 POST, GET, PUT, DELETE 이 4가지의 Method를 가지고 CRUD를 할 수 있다.  
-> METHOD	역할  
+  > METHOD	역할  
 POST	POST를 통해 해당 URI를 요청하면 리소스를 생성한다.  
 GET		GET를 통해 해당 리소스를 조회합니다. 리소스를 조회하고 해당 도큐먼트에 대한 자세한 정보를 가져온다.  
 PUT		PUT를 통해 해당 리소스를 수정한다.  
