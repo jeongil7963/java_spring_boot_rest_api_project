@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.springboot.restful.dao.restfulMapper">
+	<!-- 관수 작동 삽입  -->
+	<insert id="insert_camera_image" parameterType="map" >
+		insert into iof_camera_images (
+			ci_idx,
+			ci_imgpath,
+			ci_imgname,
+			ci_imgsize,
+			ci_createtime,
+			ras_idx,
+			cell_idx,
+			user_id
+		)
+		values(
+			default,
+			#{ci_imgpath},
+			#{ci_imgname},
+			#{ci_imgsize},
+			#{ci_createtime},
+			#{ras_idx},
+			#{cell_idx},
+			#{user_id}
+		)
+	</insert>
+	
+	<!-- 관수 작동  -->
+	<select id="search_ras_image" parameterType="map" resultType="com.springboot.restful.vo.Camera_Image_VO">
+		SELECT a.ras_idx, a.cell_idx, b.user_id
+		FROM iof_raspberry as a LEFT JOIN iof_users as b ON a.user_id = b.user_id
+		LEFT JOIN iof_apikeys as c ON a.api_idx = c.api_idx
+		WHERE b.user_token = #{user_token}
+		AND c.api_key = #{api_key}
+	</select>
+	
+	<!-- 관수 작동 삽입  -->
+	<insert id="insert_watering_control" parameterType="map" >
+		insert into iof_watering_control (
+			wc_idx,
+			wc_operatingtime,
+			wc_createtime,
+			ras_idx,
+			cell_idx,
+			user_id,
+			wc_type
+		)
+		values(
+			default,
+			#{wc_operatingtime},
+			#{wc_createtime},
+			#{ras_idx},
+			#{cell_idx},
+			#{user_id},
+			#{wc_type}
+		)
+	</insert>
+	
+	<!-- 관수 작동  -->
+	<select id="search_ras_water" parameterType="map" resultType="com.springboot.restful.vo.Watering_Control_VO">
+		SELECT a.ras_idx, a.cell_idx, b.user_id
+		FROM iof_raspberry as a LEFT JOIN iof_users as b ON a.user_id = b.user_id
+		LEFT JOIN iof_apikeys as c ON a.api_idx = c.api_idx
+		WHERE b.user_token = #{user_token}
+		AND c.api_key = #{api_key}
+	</select>
+	
+	<insert id="insert_rest" parameterType="com.springboot.restful.vo.Sensor_Value_VO" >
+		insert into iof_sensor_values (
+			sv_idx,
+			sv_sensor1,
+			sv_createtime,
+			ard_idx,
+			cell_idx,
+			user_id
+		)
+		values(
+			default,
+			#{sv_sensor1},
+			#{sv_createtime},
+			#{ard_idx},
+			#{cell_idx},
+			#{user_id}
+		)
+	</insert>
+	
+	<!-- 데이터 삽입 전 유효성 검사 -->
+	<select id="insert_search" parameterType="map" resultType="com.springboot.restful.vo.Arduino_VO" >
+		SELECT a.*, b.user_token, c.api_key
+		FROM iof_arduino as a LEFT JOIN iof_users as b ON a.user_id = b.user_id
+		LEFT JOIN iof_apikeys as c ON a.api_idx = c.api_idx
+		WHERE b.user_token = #{user_token}
+		AND c.api_key = #{api_key}
+	</select>
+	
+	<!-- 디바이스 설정 값 조회 -->
+	<select id="setting_search" parameterType="map" resultType="com.springboot.restful.vo.Raspberry_Setting_VO" >
+		SELECT a.*, b.user_token, c.api_key
+		FROM iof_raspberry as a 
+		LEFT JOIN iof_users as b ON a.user_id = b.user_id
+		LEFT JOIN iof_apikeys as c ON a.api_idx = c.api_idx
+		WHERE b.user_token = #{user_token}
+		AND c.api_key = #{api_key}
+	</select>
+	
+</mapper>
