@@ -35,10 +35,9 @@ REST 서버는 다중 계층으로 구성될 수 있으며 보안, 로드 밸런
 > 자원에 대한 행위는 HTTP Method(GET, POST, PUT, DELETE)로 표현한다.
 
 ### 5. REST API 중심 규칙
-- URI는 정보의 자원을 표현해야 한다. (리소스명은 동사보다는 명사를 사용)
+- URI는 정보의 자원을 표현해야 한다. (리소스명은 동사보다는 명사를 사용)  
+  아래와 같은 방식은 REST를 제대로 적용하지 않은 URI입니다. URI는 자원을 표현하는데 중점을 두어야 한다. delete와 같은 행위에 대한 표현이 들어가서는 안된다.
   > GET /members/delete/1  
-
-  위와 같은 방식은 REST를 제대로 적용하지 않은 URI입니다. URI는 자원을 표현하는데 중점을 두어야 한다. delete와 같은 행위에 대한 표현이 들어가서는 안된다.
 
 - 자원에 대한 행위는 HTTP Method(GET, POST, PUT, DELETE 등)로 표현  
 위의 잘못 된 URI를 HTTP Method를 통해 수정해 보면
